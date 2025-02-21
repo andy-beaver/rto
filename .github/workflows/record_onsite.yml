@@ -29,9 +29,14 @@ jobs:
 
       - name: Create update script
         run: |
-          cat > record-onsite.js << 'EOF'
-          const fs = require('fs');
-          const path = require('path');
+          cat > record-onsite.mjs << 'EOF'
+          import { readFileSync, writeFileSync } from 'fs';
+          import { join, dirname } from 'path';
+          import { fileURLToPath } from 'url';
+
+          // Get current directory
+          const __filename = fileURLToPath(import.meta.url);
+          const __dirname = dirname(__filename);
 
           // Get date parameter or use today
           const dateParam = process.env.DATE_PARAM;
@@ -50,10 +55,10 @@ jobs:
           console.log(`Recording onsite day for: ${formattedDate}`);
           
           // Path to the data file
-          const dataFilePath = path.join(__dirname, 'src', 'data', 'onsiteData.json');
+          const dataFilePath = join(__dirname, 'src', 'data', 'onsiteData.json');
 
           // Read the current data
-          const data = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+          const data = JSON.parse(readFileSync(dataFilePath, 'utf8'));
 
           // Find the correct month
           const monthIndex = recordDate.getMonth();
@@ -85,13 +90,13 @@ jobs:
             console.log(`Updated badge count for ${currentMonth.month} to ${currentMonth.badge_count}/${currentMonth.req_onsite}`);
             
             // Write the updated data back to the file
-            fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
+            writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
             console.log(`Data file updated successfully.`);
           }
           EOF
 
       - name: Record onsite day
-        run: node record-onsite.js
+        run: node record-onsite.mjs
         env:
           DATE_PARAM: ${{ inputs.date }}
           NOTES_PARAM: ${{ inputs.notes }}

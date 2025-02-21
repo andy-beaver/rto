@@ -29,9 +29,14 @@ jobs:
 
       - name: Create update script
         run: |
-          cat > record-vacation.js << 'EOF'
-          const fs = require('fs');
-          const path = require('path');
+          cat > record-vacation.mjs << 'EOF'
+          import { readFileSync, writeFileSync } from 'fs';
+          import { join, dirname } from 'path';
+          import { fileURLToPath } from 'url';
+
+          // Get current directory
+          const __filename = fileURLToPath(import.meta.url);
+          const __dirname = dirname(__filename);
 
           // Get date parameter or use today
           const dateParam = process.env.DATE_PARAM;
@@ -50,10 +55,10 @@ jobs:
           console.log(`Recording vacation day for: ${formattedDate}`);
           
           // Path to the data file
-          const dataFilePath = path.join(__dirname, 'src', 'data', 'onsiteData.json');
+          const dataFilePath = join(__dirname, 'src', 'data', 'onsiteData.json');
 
           // Read the current data
-          const data = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+          const data = JSON.parse(readFileSync(dataFilePath, 'utf8'));
 
           // Find the correct month
           const monthIndex = recordDate.getMonth();
@@ -77,12 +82,12 @@ jobs:
           console.log(`Updated off days for ${currentMonth.month} to ${currentMonth.off_days}`);
           
           // Write the updated data back to the file
-          fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
+          writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
           console.log(`Data file updated successfully.`);
           EOF
 
       - name: Record vacation day
-        run: node record-vacation.js
+        run: node record-vacation.mjs
         env:
           DATE_PARAM: ${{ inputs.date }}
           NOTES_PARAM: ${{ inputs.notes }}
