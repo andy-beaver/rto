@@ -1,0 +1,62 @@
+---
+// src/components/MonthlyProgress.astro
+import ProgressBar from './ProgressBar.astro';
+
+interface Props {
+  month: {
+    month: string;
+    workdays: number;
+    req_onsite: number;
+    badge_count: number;
+    perc_complete: string;
+  };
+}
+
+const { month } = Astro.props;
+const now = new Date();
+const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+const currentDay = now.getDate();
+const monthProgress = (currentDay / daysInMonth) * 100;
+const daysRemaining = month.req_onsite - month.badge_count;
+---
+
+<div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+    <div>
+      <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{month.month} Progress</h4>
+      <div class="mt-4">
+        <div class="flex justify-between text-sm mb-1">
+          <span class="font-medium text-gray-700 dark:text-gray-300">Month Progress</span>
+          <span class="text-gray-500 dark:text-gray-400">{Math.round(monthProgress)}%</span>
+        </div>
+        <ProgressBar value={currentDay} max={daysInMonth} />
+      </div>
+      <div class="mt-4">
+        <div class="flex justify-between text-sm mb-1">
+          <span class="font-medium text-gray-700 dark:text-gray-300">Days Complete</span>
+          <span class="text-gray-500 dark:text-gray-400">{parseInt(month.perc_complete)}%</span>
+        </div>
+        <ProgressBar value={month.badge_count} max={month.req_onsite} gradient={true} />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div class="flex flex-col justify-center items-center bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+        <span class="text-sm text-gray-500 dark:text-gray-400">Work Days</span>
+        <span class="text-3xl font-bold text-gray-900 dark:text-white">{month.workdays}</span>
+      </div>
+      <div class="flex flex-col justify-center items-center bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+        <span class="text-sm text-gray-500 dark:text-gray-400">Required</span>
+        <span class="text-3xl font-bold text-gray-900 dark:text-white">{month.req_onsite}</span>
+      </div>
+      <div class="flex flex-col justify-center items-center bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+        <span class="text-sm text-gray-500 dark:text-gray-400">Completed</span>
+        <span class="text-3xl font-bold text-gray-900 dark:text-white">{month.badge_count}</span>
+      </div>
+      <div class="flex flex-col justify-center items-center bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+        <span class="text-sm text-gray-500 dark:text-gray-400">Remaining</span>
+        <span class="text-3xl font-bold text-gray-900 dark:text-white">{daysRemaining}</span>
+      </div>
+    </div>
+  </div>
+</div>

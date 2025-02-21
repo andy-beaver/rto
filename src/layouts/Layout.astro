@@ -1,0 +1,40 @@
+---
+// src/layouts/Layout.astro
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Onsite Dashboard</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <script>
+      // Check for dark mode preference
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+  <body class="bg-gray-50 dark:bg-black min-h-screen transition-colors duration-300">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* Any global styles can go here */
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+  }
+</style>

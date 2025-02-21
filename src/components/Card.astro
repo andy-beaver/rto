@@ -1,0 +1,20 @@
+---
+// src/components/Card.astro
+interface Props {
+  title?: string;
+  className?: string;
+}
+
+const { title, className = "" } = Astro.props;
+---
+
+<div class={`bg-white dark:bg-transparent rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden ${className}`}>
+  {title && (
+    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+      <h3 class="text-lg font-medium text-gray-900 dark:text-white">{title}</h3>
+    </div>
+  )}
+  <div class="p-6">
+    <slot />
+  </div>
+</div>

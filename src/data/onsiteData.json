@@ -1,0 +1,113 @@
+{
+  "year": 2025,
+  "months": [
+    {
+      "month": "January",
+      "workdays": 20,
+      "off_days": 2,
+      "req_onsite": 9,
+      "badge_count": 9,
+      "perc_complete": "100.0%",
+      "logs": []
+    },
+    {
+      "month": "February",
+      "workdays": 19,
+      "off_days": 1,
+      "req_onsite": 9,
+      "badge_count": 5,
+      "perc_complete": "55.6%",
+      "logs": []
+    },
+    {
+      "month": "March",
+      "workdays": 21,
+      "off_days": 0,
+      "req_onsite": 11,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    },
+    {
+      "month": "April",
+      "workdays": 22,
+      "off_days": 0,
+      "req_onsite": 11,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    },
+    {
+      "month": "May",
+      "workdays": 21,
+      "off_days": 0,
+      "req_onsite": 11,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    },
+    {
+      "month": "June",
+      "workdays": 20,
+      "off_days": 0,
+      "req_onsite": 10,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    },
+    {
+      "month": "July",
+      "workdays": 22,
+      "off_days": 0,
+      "req_onsite": 11,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    },
+    {
+      "month": "August",
+      "workdays": 21,
+      "off_days": 0,
+      "req_onsite": 11,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    },
+    {
+      "month": "September",
+      "workdays": 21,
+      "off_days": 0,
+      "req_onsite": 11,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    },
+    {
+      "month": "October",
+      "workdays": 22,
+      "off_days": 0,
+      "req_onsite": 11,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    },
+    {
+      "month": "November",
+      "workdays": 18,
+      "off_days": 0,
+      "req_onsite": 9,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    },
+    {
+      "month": "December",
+      "workdays": 22,
+      "off_days": 0,
+      "req_onsite": 11,
+      "badge_count": 0,
+      "perc_complete": "0.0%",
+      "logs": []
+    }
+  ]
+}

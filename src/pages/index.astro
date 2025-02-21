@@ -1,0 +1,217 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import StatsCard from '../components/StatsCard.astro';
+import ProgressBar from '../components/ProgressBar.astro';
+import MonthlyProgress from '../components/MonthlyProgress.astro';
+import YearlyOverview from '../components/YearlyOverview.astro';
+import NavBar from '../components/NavBar.astro';
+import type { MonthData, OnsiteData } from '../types';
+
+// Import JSON data with type assertion
+import onsiteDataImport from '../data/onsiteData.json';
+const onsiteData = onsiteDataImport as unknown as OnsiteData;
+
+// Define the current page for navigation
+const currentPage = 'dashboard';
+
+// Calculate key metrics
+const currentDate = new Date();
+const currentMonthIndex = currentDate.getMonth();
+const currentYear = currentDate.getFullYear();
+const currentMonth = onsiteData.months[currentMonthIndex];
+
+// Total metrics
+const totalRequired = onsiteData.months.reduce((sum: number, month: MonthData) => sum + month.req_onsite, 0);
+const totalCompleted = onsiteData.months.reduce((sum: number, month: MonthData) => sum + month.badge_count, 0);
+const yearlyPercentage = (totalCompleted / totalRequired) * 100;
+
+// Remaining days
+const remainingThisMonth = currentMonth.req_onsite - currentMonth.badge_count;
+const remainingTotal = totalRequired - totalCompleted;
+
+// Status - Are we ahead or behind?
+const elapsedMonths = currentMonthIndex;
+const expectedCompletion = (elapsedMonths / 12) * totalRequired;
+const status = totalCompleted >= expectedCompletion ? 'ahead' : 'behind';
+const statusDifference = Math.abs(totalCompleted - expectedCompletion);
+---
+
+<Layout>
+  <main class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+    <!-- Header -->
+    <header class="mb-8 sm:mb-12">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+        <div>
+          <h1 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-primary-600 to-indigo-600 text-transparent bg-clip-text">
+            Onsite Dashboard
+          </h1>
+          <p class="text-gray-500 dark:text-gray-400 mt-2">
+            Tracking my required time in the office
+          </p>
+        </div>
+        <div class="mt-4 sm:mt-0">
+          <button
+            id="theme-toggle"
+            class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 hidden dark:block text-gray-200"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 block dark:hidden text-gray-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <NavBar currentPage={currentPage} />
+
+    <!-- Stats Overview Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+      <StatsCard
+        title="This Month"
+        value={currentMonth.badge_count}
+        total={currentMonth.req_onsite}
+        percentage={parseInt(currentMonth.perc_complete)}
+        label={currentMonth.month}
+        trend="neutral"
+      />
+      <StatsCard
+        title="Remaining This Month"
+        value={remainingThisMonth}
+        total={currentMonth.req_onsite}
+        percentage={remainingThisMonth / currentMonth.req_onsite * 100}
+        label="days left"
+        trend={remainingThisMonth > 0 ? "up" : "down"}
+      />
+      <StatsCard
+        title="Year to Date"
+        value={totalCompleted}
+        total={totalRequired}
+        percentage={yearlyPercentage}
+        label="days completed"
+        trend={totalCompleted > 0 ? "up" : "neutral"}
+      />
+      <StatsCard
+        title="Status"
+        value={statusDifference}
+        total={expectedCompletion}
+        percentage={0}
+        label={`days ${status}`}
+        trend={status === 'ahead' ? "up" : "down"}
+        hideProgress={true}
+      />
+    </div>
+
+    <!-- Current Month Overview -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <Card title="Current Month Progress" className="lg:col-span-2">
+        <MonthlyProgress month={currentMonth} />
+      </Card>
+      <Card title="Year Overview" className="lg:col-span-1">
+        <YearlyOverview months={onsiteData.months} />
+      </Card>
+    </div>
+
+<!-- Monthly Breakdown -->
+<Card title="Monthly Breakdown" className="mb-8">
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300">
+      <thead class="text-xs uppercase bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+        <tr>
+          <th class="py-3 px-6">Month</th>
+          <th class="py-3 px-6">Work Days</th>
+          <th class="py-3 px-6">Required</th>
+          <th class="py-3 px-6">Completed</th>
+          <th class="py-3 px-6">Percentage</th>
+          <th class="py-3 px-6">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {onsiteData.months.map((month: MonthData, index: number) => (
+          <tr class={`border-b dark:border-gray-700 ${index === currentMonthIndex ? 'bg-blue-50 dark:bg-blue-900/20' : ''}`}>
+            <td class="py-4 px-6 font-medium text-gray-900 dark:text-white">{month.month}</td>
+            <td class="py-4 px-6 text-gray-700 dark:text-gray-300">{month.workdays}</td>
+            <td class="py-4 px-6 text-gray-700 dark:text-gray-300">{month.req_onsite}</td>
+            <td class="py-4 px-6 text-gray-700 dark:text-gray-300">{month.badge_count}</td>
+            <td class="py-4 px-6 text-gray-700 dark:text-gray-300">{month.perc_complete}</td>
+            <td class="py-4 px-6">
+              {
+                index < currentMonthIndex ? (
+                  parseInt(month.perc_complete) >= 100 ? (
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                      Complete
+                    </span>
+                  ) : (
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                      Incomplete
+                    </span>
+                  )
+                ) : index === currentMonthIndex ? (
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                    In Progress
+                  </span>
+                ) : (
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                    Upcoming
+                  </span>
+                )
+              }
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Card>
+
+    <!-- Footer -->
+    <footer class="text-center text-gray-500 dark:text-gray-400 text-sm py-8">
+      <p>Last updated: {new Date().toLocaleDateString()}</p>
+      <p class="mt-2">
+        <a href="https://github.com/yourusername/new-onsite-dashboard" class="text-primary-600 dark:text-primary-400 hover:underline">
+          View on GitHub
+        </a>
+      </p>
+    </footer>
+  </main>
+</Layout>
+
+<script>
+  // Theme toggle functionality
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    if (document.documentElement.classList.contains('dark')) {
+      localStorage.theme = 'light';
+      document.documentElement.classList.remove('dark');
+    } else {
+      localStorage.theme = 'dark';
+      document.documentElement.classList.add('dark');
+    }
+  });
+</script>

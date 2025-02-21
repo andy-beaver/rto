@@ -1,0 +1,44 @@
+---
+// src/components/ProgressBar.astro
+interface Props {
+  value: number;
+  max: number;
+  className?: string;
+  showLabel?: boolean;
+  gradient?: boolean;
+}
+
+const { 
+  value, 
+  max, 
+  className = "", 
+  showLabel = true,
+  gradient = false
+} = Astro.props;
+
+const percentage = Math.min(Math.round((value / max) * 100), 100);
+---
+
+<div class={`w-full ${className}`}>
+  {showLabel && (
+    <div class="flex justify-between mb-1 text-sm font-medium">
+      <span class="text-gray-700 dark:text-gray-300">{value} of {max}</span>
+      <span class="text-gray-700 dark:text-gray-300">{percentage}%</span>
+    </div>
+  )}
+  <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+    <div
+      class={`h-2.5 rounded-full ${
+        gradient 
+          ? "bg-gradient-to-r from-primary-500 to-primary-700" 
+          : percentage >= 100 
+            ? "bg-green-500" 
+            : percentage >= 50 
+              ? "bg-primary-500" 
+              : "bg-orange-500"
+      }`}
+      style={`width: ${percentage}%`}
+    >
+    </div>
+  </div>
+</div>

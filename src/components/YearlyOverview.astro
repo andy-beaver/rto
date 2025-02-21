@@ -1,0 +1,87 @@
+---
+// src/components/YearlyOverview.astro
+import type { MonthData } from '../types';
+
+interface Props {
+  months: MonthData[];
+}
+
+const { months } = Astro.props;
+const currentMonth = new Date().getMonth();
+
+// Calculate yearly progress
+const totalRequired = months.reduce((sum, month) => sum + month.req_onsite, 0);
+const totalCompleted = months.reduce((sum, month) => sum + month.badge_count, 0);
+const yearlyPercentage = (totalCompleted / totalRequired) * 100;
+
+// Calculate expected progress based on current month
+const expectedCompletion = months.slice(0, currentMonth + 1).reduce((sum, month) => sum + month.req_onsite, 0);
+const expectedPercentage = (expectedCompletion / totalRequired) * 100;
+
+// Status - ahead or behind
+const diff = totalCompleted - expectedCompletion;
+const status = diff >= 0 ? 'ahead' : 'behind';
+---
+
+<div>
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-2">
+      <h4 class="text-lg font-medium text-gray-900 dark:text-white">Yearly Progress</h4>
+      <span class="text-3xl font-bold text-gray-900 dark:text-white">{Math.round(yearlyPercentage)}%</span>
+    </div>
+    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 mb-4">
+      <div class="bg-gradient-to-r from-primary-500 to-primary-700 h-4 rounded-full" style={`width: ${yearlyPercentage}%`}></div>
+    </div>
+    
+    <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+      <span class="inline-block">
+        Completed: <span class="font-medium text-gray-900 dark:text-white">{totalCompleted} days</span>
+      </span>
+      <span class="inline-block ml-4">
+        Required: <span class="font-medium text-gray-900 dark:text-white">{totalRequired} days</span>
+      </span>
+    </div>
+    
+    <div class="text-sm">
+      <span class={`font-medium ${diff >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+        {Math.abs(diff)} days {status}
+      </span>
+      <span class="text-gray-500 dark:text-gray-400"> than expected</span>
+    </div>
+  </div>
+  
+  <div>
+    <h4 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Monthly Breakdown</h4>
+    <div class="space-y-3">
+      {months.slice(0, 6).map((month, i) => (
+        <div class="flex items-center">
+          <div class="w-24 text-sm text-gray-500 dark:text-gray-400">{month.month}</div>
+          <div class="flex-1">
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div 
+                class={`h-2 rounded-full ${
+                  parseInt(month.perc_complete) >= 100 
+                    ? 'bg-green-500' 
+                    : i === currentMonth 
+                      ? 'bg-blue-500' 
+                      : i < currentMonth 
+                        ? 'bg-red-500' 
+                        : 'bg-gray-400 dark:bg-gray-500'
+                }`} 
+                style={`width: ${month.perc_complete}`}
+              ></div>
+            </div>
+          </div>
+          <div class="w-16 text-right text-sm font-medium text-gray-900 dark:text-white">{month.perc_complete}</div>
+        </div>
+      ))}
+      {months.length > 6 && (
+        <div class="text-center text-sm text-gray-500 dark:text-gray-400 pt-2">
+          <a href="/src/components/YearlyOverview" class="text-primary-600 dark:text-primary-400 hover:underline">
+            View All Months
+          </a>
+        </div>
+      )}
+    </div>
+  </div>
+</div>
