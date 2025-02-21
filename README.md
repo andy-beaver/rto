@@ -1,48 +1,107 @@
-# Astro Starter Kit: Basics
+# Using the Onsite Tracking Workflows
 
-```sh
-npm create astro@latest -- --template basics
+This guide explains how to use the GitHub Actions workflows to track your onsite days and vacation days.
+
+## Setting Up the Workflows
+
+1. Create a `.github/workflows` directory in your repository
+2. Add the two workflow files:
+   - `record-onsite.yml`
+   - `record-vacation.yml`
+
+## Recording an Onsite Day
+
+There are two ways to record that you went into the office:
+
+### Option 1: Using the GitHub UI
+
+1. Go to your repository on GitHub
+2. Click on the "Actions" tab
+3. Select the "Record Onsite Day" workflow
+4. Click the "Run workflow" button
+5. Optional: Enter a specific date (YYYY-MM-DD format) or leave blank for today
+6. Optional: Add notes about this onsite day
+7. Click "Run workflow"
+
+### Option 2: Using the GitHub CLI
+
+```bash
+gh workflow run "Record Onsite Day" -f date="2025-02-21" -f notes="Team meeting day"
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Recording a Vacation Day
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Similarly, to record a vacation day:
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Option 1: Using the GitHub UI
 
-## 🚀 Project Structure
+1. Go to your repository on GitHub
+2. Click on the "Actions" tab
+3. Select the "Record Vacation Day" workflow
+4. Click the "Run workflow" button
+5. Optional: Enter a specific date (YYYY-MM-DD format) or leave blank for today
+6. Optional: Add notes about this vacation day
+7. Click "Run workflow"
 
-Inside of your Astro project, you'll see the following folders and files:
+### Option 2: Using the GitHub CLI
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+gh workflow run "Record Vacation Day" -f date="2025-03-15" -f notes="Spring break"
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## What the Workflows Do
 
-## 🧞 Commands
+### Record Onsite Day
 
-All commands are run from the root of the project, from a terminal:
+When you run this workflow:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. It increments the badge count for the specified month
+2. Updates the completion percentage 
+3. Adds an entry to the logs with the date and any notes
+4. Commits the changes to your repository
+5. Rebuilds and redeploys your site
 
-## 👀 Want to learn more?
+The workflow won't increment the count if you've already reached your required onsite days for the month.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Record Vacation Day
+
+When you run this workflow:
+
+1. It increments the off days count for the specified month
+2. Adds an entry to the logs with the date and any notes
+3. Commits the changes to your repository
+4. Rebuilds and redeploys your site
+
+## Viewing Your Records
+
+After running either workflow:
+
+1. Your GitHub Pages site will be updated automatically
+2. The changes will appear in the dashboard
+3. The logs will show your attendance history
+4. The stats will reflect the current status
+
+## Advanced Usage
+
+### Adding Multiple Days at Once
+
+If you need to add multiple days at once, simply run the workflow multiple times with different dates.
+
+### Automating Regular Updates
+
+You can also set up additional workflows with schedules if you have regular office days:
+
+```yaml
+on:
+  schedule:
+    # Every Tuesday and Thursday at 9 AM UTC
+    - cron: '0 9 * * 2,4'
+```
+
+## Troubleshooting
+
+If the workflow fails:
+
+- Check that the date format is correct (YYYY-MM-DD)
+- Verify that the data file path is correct in the script
+- Check the workflow run logs for specific error messages

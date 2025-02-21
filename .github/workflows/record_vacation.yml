@@ -1,0 +1,113 @@
+name: Record Vacation Day
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date of vacation day (YYYY-MM-DD), defaults to today if empty'
+        required: false
+        type: string
+      notes:
+        description: 'Optional notes about this vacation day'
+        required: false
+        type: string
+
+jobs:
+  record-vacation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Create update script
+        run: |
+          cat > record-vacation.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          // Get date parameter or use today
+          const dateParam = process.env.DATE_PARAM;
+          const recordDate = dateParam && dateParam.trim() !== '' 
+            ? new Date(dateParam) 
+            : new Date();
+          
+          if (isNaN(recordDate.getTime())) {
+            console.error(`Invalid date format: ${dateParam}`);
+            process.exit(1);
+          }
+          
+          const formattedDate = recordDate.toISOString().split('T')[0];
+          const notes = process.env.NOTES_PARAM || '';
+
+          console.log(`Recording vacation day for: ${formattedDate}`);
+          
+          // Path to the data file
+          const dataFilePath = path.join(__dirname, 'src', 'data', 'onsiteData.json');
+
+          // Read the current data
+          const data = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+
+          // Find the correct month
+          const monthIndex = recordDate.getMonth();
+          const currentMonth = data.months[monthIndex];
+          
+          // Increment off days
+          currentMonth.off_days += 1;
+          
+          // Record in logs
+          if (!currentMonth.logs) {
+            currentMonth.logs = [];
+          }
+          
+          currentMonth.logs.push({
+            date: formattedDate,
+            action: "Vacation day recorded",
+            timestamp: new Date().toISOString(),
+            notes: notes
+          });
+          
+          console.log(`Updated off days for ${currentMonth.month} to ${currentMonth.off_days}`);
+          
+          // Write the updated data back to the file
+          fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
+          console.log(`Data file updated successfully.`);
+          EOF
+
+      - name: Record vacation day
+        run: node record-vacation.js
+        env:
+          DATE_PARAM: ${{ inputs.date }}
+          NOTES_PARAM: ${{ inputs.notes }}
+
+      - name: Commit and push if there are changes
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add -A
+          
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Record vacation day for ${{ inputs.date || 'today' }}"
+            git push
+          fi
+      
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+        
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
