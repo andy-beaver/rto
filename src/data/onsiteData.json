@@ -15,9 +15,16 @@
       "workdays": 19,
       "off_days": 1,
       "req_onsite": 9,
-      "badge_count": 5,
-      "perc_complete": "55.6%",
-      "logs": []
+      "badge_count": 6,
+      "perc_complete": "66.7%",
+      "logs": [
+        {
+          "date": "2025-02-21",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-02-21T18:35:23.737Z",
+          "notes": ""
+        }
+      ]
     },
     {
       "month": "March",
