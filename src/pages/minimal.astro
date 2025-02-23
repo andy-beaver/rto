@@ -21,49 +21,57 @@ const options: Intl.DateTimeFormatOptions = {
 };
 const formattedDate = currentDate.toLocaleDateString('en-US', options);
 
-// Get last recorded day (just using current date for demo)
-const lastRecordedDay = formattedDate;
-
 // Calculate completion percentage
 const completionPercentage = parseFloat(currentMonth.perc_complete);
 ---
 
 <Layout>
-  <div class="flex flex-col items-center justify-center min-h-screen p-6 bg-white dark:bg-black text-center">
+  <div class="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black text-center p-4">
     <!-- Top stats section - 3 big numbers -->
-    <div class="w-full max-w-4xl grid grid-cols-3 gap-8 mb-16">
-      <div class="flex flex-col items-center">
-        <span class="text-9xl font-bold text-black dark:text-white">{currentMonth.req_onsite}</span>
-        <span class="text-xl text-gray-700 dark:text-gray-300">Required Onsite Days</span>
-      </div>
-      
-      <div class="flex flex-col items-center">
-        <span class="text-9xl font-bold text-black dark:text-white">{currentMonth.badge_count}</span>
-        <span class="text-xl text-gray-700 dark:text-gray-300">Days Onsite</span>
-      </div>
-      
-      <div class="flex flex-col items-center">
-        <span class="text-9xl font-bold text-black dark:text-white">{currentMonth.req_onsite - currentMonth.badge_count}</span>
-        <span class="text-xl text-gray-700 dark:text-gray-300">Onsite Days Remaining</span>
+    <div class="w-full max-w-lg mb-8">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div class="flex flex-col items-center mb-8 sm:mb-0">
+          <span class="text-7xl sm:text-9xl font-bold text-black dark:text-white mb-2">{currentMonth.req_onsite}</span>
+          <span class="text-lg sm:text-xl text-gray-700 dark:text-gray-300">Required Days</span>
+        </div>
+        
+        <div class="flex flex-col items-center mb-8 sm:mb-0">
+          <span class="text-7xl sm:text-9xl font-bold text-black dark:text-white mb-2">{currentMonth.badge_count}</span>
+          <span class="text-lg sm:text-xl text-gray-700 dark:text-gray-300">Days Onsite</span>
+        </div>
+        
+        <div class="flex flex-col items-center mb-8 sm:mb-0">
+          <span class="text-7xl sm:text-9xl font-bold text-black dark:text-white mb-2">{currentMonth.req_onsite - currentMonth.badge_count}</span>
+          <span class="text-lg sm:text-xl text-gray-700 dark:text-gray-300">Days Left</span>
+        </div>
       </div>
     </div>
     
     <!-- Current date section -->
-    <div class="mb-16">
-      <h2 class="text-6xl font-bold text-black dark:text-white">{formattedDate}</h2>
-      <p class="text-xl text-gray-700 dark:text-gray-300 mt-2">Last Recorded Day</p>
+    <div class="mb-8">
+      <h2 class="text-4xl sm:text-6xl font-bold text-black dark:text-white mb-2">{formattedDate}</h2>
+      <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300">Last Recorded Day</p>
     </div>
     
     <!-- Completion percentage -->
-    <div class="mb-16">
-      <h2 class="text-9xl font-bold text-yellow-400">{completionPercentage}%</h2>
-      <p class="text-xl text-gray-700 dark:text-gray-300 mt-2">Month Completed</p>
+    <div class="mb-8">
+      <h2 class="text-7xl sm:text-9xl font-bold text-yellow-400">{completionPercentage}%</h2>
+      <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300">Month Completed</p>
     </div>
     
-    <!-- Back to dashboard link -->
-    <div class="mt-8">
-      <a href="/" class="text-lg text-blue-600 dark:text-blue-400 hover:underline">
-        Back to Dashboard
+    <!-- Navigation links -->
+    <div class="flex gap-4">
+      <a 
+        href="/" 
+        class="text-lg text-blue-600 dark:text-blue-400 hover:underline"
+      >
+        Dashboard
+      </a>
+      <a 
+        href="/charts" 
+        class="text-lg text-blue-600 dark:text-blue-400 hover:underline"
+      >
+        Charts
       </a>
     </div>
   </div>

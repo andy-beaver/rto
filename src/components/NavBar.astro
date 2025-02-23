@@ -10,10 +10,11 @@ const { currentPage } = Astro.props;
 <nav class="bg-white dark:bg-transparent shadow-sm border-b border-gray-200 dark:border-gray-800 mb-8">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
-      <div class="flex">
+      <div class="flex items-center">
         <div class="flex-shrink-0 flex items-center">
-          <span class="text-xl font-bold text-primary-600 dark:text-primary-400">Onsite</span>
+          <span class="text-xl font-bold text-primary-600 dark:text-primary-400 mr-4">Onsite</span>
         </div>
+        <!-- Desktop Navigation -->
         <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
           <a 
             href="/" 
@@ -26,7 +27,7 @@ const { currentPage } = Astro.props;
             Dashboard
           </a>
           <a 
-            href="charts" 
+            href="/charts" 
             class={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
               currentPage === 'charts' 
                 ? 'border-primary-500 text-gray-900 dark:text-white' 
@@ -36,7 +37,7 @@ const { currentPage } = Astro.props;
             Charts
           </a>
           <a 
-            href="minimal" 
+            href="/minimal" 
             class={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
               currentPage === 'minimal' 
                 ? 'border-primary-500 text-gray-900 dark:text-white' 
@@ -47,6 +48,41 @@ const { currentPage } = Astro.props;
           </a>
         </div>
       </div>
+
+      <!-- Mobile Navigation -->
+      <div class="sm:hidden flex items-center space-x-4">
+        <a 
+          href="/" 
+          class={`text-sm font-medium ${
+            currentPage === 'dashboard' 
+              ? 'text-primary-600 dark:text-primary-400' 
+              : 'text-gray-500 dark:text-gray-400'
+          }`}
+        >
+          D
+        </a>
+        <a 
+          href="/charts" 
+          class={`text-sm font-medium ${
+            currentPage === 'charts' 
+              ? 'text-primary-600 dark:text-primary-400' 
+              : 'text-gray-500 dark:text-gray-400'
+          }`}
+        >
+          C
+        </a>
+        <a 
+          href="/minimal" 
+          class={`text-sm font-medium ${
+            currentPage === 'minimal' 
+              ? 'text-primary-600 dark:text-primary-400' 
+              : 'text-gray-500 dark:text-gray-400'
+          }`}
+        >
+          M
+        </a>
+      </div>
+
       <div class="flex items-center">
         <button
           id="theme-toggle"
