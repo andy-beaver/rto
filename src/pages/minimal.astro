@@ -7,26 +7,33 @@ import type { OnsiteData } from '../types';
 import onsiteDataImport from '../data/onsiteData.json';
 const onsiteData = onsiteDataImport as unknown as OnsiteData;
 
-// Navigation contraints
-// const currentPage = 'minimal'; // Define currentPage variable
-const basePath = '/new-onsite-dashboard';
-
 // Calculate key metrics
 const currentDate = new Date();
 const currentMonthIndex = currentDate.getMonth();
 const currentMonth = onsiteData.months[currentMonthIndex];
 
-// Format date
-const options: Intl.DateTimeFormatOptions = { 
-  weekday: 'long', 
-  year: 'numeric', 
-  month: 'long', 
-  day: 'numeric' 
-};
-const formattedDate = currentDate.toLocaleDateString('en-US', options);
+// Find the last recorded onsite day from logs
+let lastRecordedDay = '';
+const lastOnsiteEntry = currentMonth.logs
+  ?.filter(log => log.action === "Onsite day recorded")
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+
+if (lastOnsiteEntry) {
+  const date = new Date(lastOnsiteEntry.date);
+  lastRecordedDay = date.toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+} else {
+  lastRecordedDay = 'No onsite days recorded this month';
+}
 
 // Calculate completion percentage
 const completionPercentage = parseFloat(currentMonth.perc_complete);
+
+const basePath = '/new-onsite-dashboard'; // Add base path for links
 ---
 
 <Layout>
@@ -51,9 +58,9 @@ const completionPercentage = parseFloat(currentMonth.perc_complete);
       </div>
     </div>
     
-    <!-- Current date section -->
+    <!-- Last recorded day section -->
     <div class="mb-8">
-      <h2 class="text-4xl sm:text-6xl font-bold text-black dark:text-white mb-2">{formattedDate}</h2>
+      <h2 class="text-4xl sm:text-6xl font-bold text-black dark:text-white mb-2">{lastRecordedDay}</h2>
       <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300">Last Recorded Day</p>
     </div>
     
@@ -66,13 +73,13 @@ const completionPercentage = parseFloat(currentMonth.perc_complete);
     <!-- Navigation links -->
     <div class="flex gap-4">
       <a 
-        href={`${basePath}`} 
+        href={`${basePath}/`}
         class="text-lg text-blue-600 dark:text-blue-400 hover:underline"
       >
         Dashboard
       </a>
       <a 
-        href={`${basePath}/charts`} 
+        href={`${basePath}/charts`}
         class="text-lg text-blue-600 dark:text-blue-400 hover:underline"
       >
         Charts
