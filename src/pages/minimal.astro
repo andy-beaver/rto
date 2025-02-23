@@ -7,6 +7,10 @@ import type { OnsiteData } from '../types';
 import onsiteDataImport from '../data/onsiteData.json';
 const onsiteData = onsiteDataImport as unknown as OnsiteData;
 
+// Navigation contraints
+// const currentPage = 'minimal'; // Define currentPage variable
+const basePath = '/new-onsite-dashboard';
+
 // Calculate key metrics
 const currentDate = new Date();
 const currentMonthIndex = currentDate.getMonth();
@@ -62,13 +66,13 @@ const completionPercentage = parseFloat(currentMonth.perc_complete);
     <!-- Navigation links -->
     <div class="flex gap-4">
       <a 
-        href="/" 
+        href={`${basePath}`} 
         class="text-lg text-blue-600 dark:text-blue-400 hover:underline"
       >
         Dashboard
       </a>
       <a 
-        href="/charts" 
+        href={`${basePath}/charts`} 
         class="text-lg text-blue-600 dark:text-blue-400 hover:underline"
       >
         Charts
