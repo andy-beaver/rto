@@ -5,7 +5,7 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://andy-beaver.github.io',
-  base: '/',
+  base: '/new-onsite-dashboard',
   integrations: [tailwind(), react()],
   output: 'static'
 });
