@@ -47,7 +47,7 @@ jobs:
           const __filename = fileURLToPath(import.meta.url);
           const __dirname = dirname(__filename);
 
-          // Gas price API function (fallback if not provided)
+          // Wack attempt at a gas price API function (fallback if not provided)
           async function fetchGasPrice() {
             // This would normally connect to a real gas price API
             // For demo, we'll use a randomized realistic price or the provided value
@@ -57,10 +57,10 @@ jobs:
             }
             
             // Simulate API call with realistic gas prices for Kansas City
-            // In production, replace with actual API call to gas price service
+            // In the future I mightreplace with actual API call to gas price service
             return new Promise((resolve) => {
-              // Randomize around the $3.00-$3.50 range for Missouri
-              const basePrice = 3.25;
+              // Randomize around the $2.50-$3.00 range for Missouri
+              const basePrice = 2.75;
               const variation = 0.25;
               const randomPrice = (basePrice + (Math.random() * variation * 2 - variation)).toFixed(2);
               console.log(`Using simulated gas price: $${randomPrice}/gallon`);
@@ -88,7 +88,7 @@ jobs:
           const dataFilePath = join(__dirname, 'src', 'data', 'onsiteData.json');
           const commuteFilePath = join(__dirname, 'src', 'data', 'commuteData.json');
 
-          // Read the current data
+          // Read the current data from said files
           const onsiteData = JSON.parse(readFileSync(dataFilePath, 'utf8'));
           let commuteData = {};
           
@@ -106,7 +106,7 @@ jobs:
           const monthIndex = recordDate.getMonth();
           const currentMonth = onsiteData.months[monthIndex];
 
-          // Fetch gas price (or use provided)
+          // Fetch gas price (or use my static logic)
           const gasPrice = await fetchGasPrice();
           
           // Record gas price history

@@ -1,8 +1,8 @@
 {
   "commute": {
     "route": {
-      "from": "St. Joseph, MO",
-      "to": "1 Memorial Dr, Kansas City, MO",
+      "from": "Home",
+      "to": "Work",
       "distanceOneWay": 55,
       "unit": "miles",
       "timeOneWayMinutes": 55
