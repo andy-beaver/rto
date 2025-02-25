@@ -15,13 +15,19 @@
       "workdays": 19,
       "off_days": 1,
       "req_onsite": 9,
-      "badge_count": 6,
-      "perc_complete": "66.7%",
+      "badge_count": 7,
+      "perc_complete": "77.8%",
       "logs": [
         {
           "date": "2025-02-21",
           "action": "Onsite day recorded",
           "timestamp": "2025-02-21T18:35:23.737Z",
+          "notes": ""
+        },
+        {
+          "date": "2025-02-25",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-02-25T04:05:09.337Z",
           "notes": ""
         }
       ]
