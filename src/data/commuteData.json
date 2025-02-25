@@ -1,0 +1,25 @@
+{
+  "commute": {
+    "route": {
+      "from": "St. Joseph, MO",
+      "to": "1 Memorial Dr, Kansas City, MO",
+      "distanceOneWay": 55,
+      "unit": "miles",
+      "timeOneWayMinutes": 55
+    },
+    "vehicle": {
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2017,
+      "efficiency": 33,
+      "unit": "mpg",
+      "maintenanceCostPerMile": 0.08
+    },
+    "preferences": {
+      "hourlyValueOfTime": 30,
+      "currency": "USD"
+    }
+  },
+  "commuteLogs": [],
+  "gasHistory": []
+}
