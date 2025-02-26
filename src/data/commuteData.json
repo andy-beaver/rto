@@ -24,12 +24,20 @@
     {
       "date": "2025-02-25",
       "gasPrice": 2.92
+    },
+    {
+      "date": "2025-02-26",
+      "gasPrice": 2.96
     }
   ],
   "gasHistory": [
     {
       "date": "2025-02-25",
       "pricePerGallon": 2.92
+    },
+    {
+      "date": "2025-02-26",
+      "pricePerGallon": 2.96
     }
   ]
 }
