@@ -49,7 +49,7 @@
     {
       "month": "March",
       "workdays": 21,
-      "off_days": 0,
+      "off_days": 1,
       "req_onsite": 11,
       "badge_count": 1,
       "perc_complete": "9.1%",
@@ -60,6 +60,12 @@
           "timestamp": "2025-03-07T00:14:56.070Z",
           "notes": "",
           "gasPrice": 2.79
+        },
+        {
+          "date": "2025-03-09",
+          "action": "Vacation day recorded",
+          "timestamp": "2025-03-09T14:49:38.379Z",
+          "notes": ""
         }
       ]
     },
