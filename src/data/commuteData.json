@@ -32,6 +32,10 @@
     {
       "date": "2025-03-07",
       "gasPrice": 2.79
+    },
+    {
+      "date": "2025-03-10",
+      "gasPrice": 2.58
     }
   ],
   "gasHistory": [
@@ -46,6 +50,10 @@
     {
       "date": "2025-03-07",
       "pricePerGallon": 2.79
+    },
+    {
+      "date": "2025-03-10",
+      "pricePerGallon": 2.58
     }
   ]
 }
