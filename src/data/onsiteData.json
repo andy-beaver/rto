@@ -49,10 +49,10 @@
     {
       "month": "March",
       "workdays": 20,
-      "off_days": 1,
-      "req_onsite": 10,
+      "off_days": 2,
+      "req_onsite": 9,
       "badge_count": 2,
-      "perc_complete": "18.2%",
+      "perc_complete": "22.2%",
       "logs": [
         {
           "date": "2025-03-06",
@@ -73,6 +73,16 @@
           "timestamp": "2025-03-10T10:09:33.362Z",
           "notes": "",
           "gasPrice": 2.58
+        },
+        {
+          "date": "2025-03-11",
+          "action": "Vacation day recorded",
+          "timestamp": "2025-03-11T13:57:13.487Z",
+          "notes": "",
+          "adjustedReqOnsite": {
+            "oldValue": 10,
+            "newValue": 9
+          }
         }
       ]
     },
