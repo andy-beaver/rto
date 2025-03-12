@@ -44,8 +44,19 @@ const statusDifference = Math.abs(totalCompleted - expectedCompletion);
     <header class="mb-8 sm:mb-12">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
         <div>
-          <h1 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-primary-600 to-indigo-600 text-transparent bg-clip-text">
-            RT⏲ Tracker
+          <h1 class="text-3xl sm:text-4xl font-bold flex items-center gap-2">
+            <span class="bg-gradient-to-r from-primary-600 to-indigo-600 text-transparent bg-clip-text">RT</span>
+            <svg 
+              class="w-8 h-8 sm:w-9 sm:h-9 fill-transparent stroke-current inline-block bg-gradient-to-r from-primary-600 to-indigo-600 text-transparent bg-clip-text"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span class="bg-gradient-to-r from-primary-600 to-indigo-600 text-transparent bg-clip-text">Tracker</span>
           </h1>
           <p class="text-gray-500 dark:text-gray-400 mt-2">
             A 🪄sidequest using AstoJS and Github actions. 
