@@ -44,6 +44,10 @@
     {
       "date": "2025-03-13",
       "gasPrice": 2.54
+    },
+    {
+      "date": "2025-03-14",
+      "gasPrice": 2.73
     }
   ],
   "gasHistory": [
@@ -70,6 +74,10 @@
     {
       "date": "2025-03-13",
       "pricePerGallon": 2.54
+    },
+    {
+      "date": "2025-03-14",
+      "pricePerGallon": 2.73
     }
   ]
 }
