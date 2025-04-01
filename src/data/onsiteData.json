@@ -140,9 +140,17 @@
       "workdays": 22,
       "off_days": 0,
       "req_onsite": 11,
-      "badge_count": 0,
-      "perc_complete": "0.0%",
-      "logs": []
+      "badge_count": 1,
+      "perc_complete": "9.1%",
+      "logs": [
+        {
+          "date": "2025-04-01",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-04-01T10:09:08.165Z",
+          "notes": "",
+          "gasPrice": 2.56
+        }
+      ]
     },
     {
       "month": "May",
