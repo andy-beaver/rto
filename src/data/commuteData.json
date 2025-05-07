@@ -112,6 +112,10 @@
     {
       "date": "2025-05-05",
       "gasPrice": 2.5
+    },
+    {
+      "date": "2025-05-07",
+      "gasPrice": 2.86
     }
   ],
   "gasHistory": [
@@ -206,6 +210,10 @@
     {
       "date": "2025-05-05",
       "pricePerGallon": 2.5
+    },
+    {
+      "date": "2025-05-07",
+      "pricePerGallon": 2.86
     }
   ]
 }
