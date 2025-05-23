@@ -225,7 +225,7 @@
     {
       "month": "May",
       "workdays": 21,
-      "off_days": 1,
+      "off_days": 2,
       "req_onsite": 10,
       "badge_count": 9,
       "perc_complete": "90.0%",
@@ -300,6 +300,16 @@
           "notes": "",
           "adjustedReqOnsite": {
             "oldValue": 11,
+            "newValue": 10
+          }
+        },
+        {
+          "date": "2025-05-23",
+          "action": "Vacation day recorded",
+          "timestamp": "2025-05-23T14:10:47.125Z",
+          "notes": "",
+          "adjustedReqOnsite": {
+            "oldValue": 10,
             "newValue": 10
           }
         }
