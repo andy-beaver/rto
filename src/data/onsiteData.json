@@ -225,10 +225,10 @@
     {
       "month": "May",
       "workdays": 21,
-      "off_days": 0,
-      "req_onsite": 11,
+      "off_days": 1,
+      "req_onsite": 10,
       "badge_count": 9,
-      "perc_complete": "81.8%",
+      "perc_complete": "90.0%",
       "logs": [
         {
           "date": "2025-05-05",
@@ -292,6 +292,16 @@
           "timestamp": "2025-05-22T12:31:20.005Z",
           "notes": "",
           "gasPrice": 2.79
+        },
+        {
+          "date": "2025-05-23",
+          "action": "Vacation day recorded",
+          "timestamp": "2025-05-23T14:09:28.110Z",
+          "notes": "",
+          "adjustedReqOnsite": {
+            "oldValue": 11,
+            "newValue": 10
+          }
         }
       ]
     },
