@@ -330,9 +330,17 @@
       "workdays": 20,
       "off_days": 0,
       "req_onsite": 10,
-      "badge_count": 0,
-      "perc_complete": "0.0%",
-      "logs": []
+      "badge_count": 1,
+      "perc_complete": "10.0%",
+      "logs": [
+        {
+          "date": "2025-06-04",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-06-04T10:02:08.687Z",
+          "notes": "",
+          "gasPrice": 2.94
+        }
+      ]
     },
     {
       "month": "July",
