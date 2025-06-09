@@ -328,7 +328,7 @@
     {
       "month": "June",
       "workdays": 20,
-      "off_days": 0,
+      "off_days": 1,
       "req_onsite": 10,
       "badge_count": 1,
       "perc_complete": "10.0%",
@@ -339,6 +339,16 @@
           "timestamp": "2025-06-04T10:02:08.687Z",
           "notes": "",
           "gasPrice": 2.94
+        },
+        {
+          "date": "2025-06-09",
+          "action": "Vacation day recorded",
+          "timestamp": "2025-06-09T02:44:29.531Z",
+          "notes": "",
+          "adjustedReqOnsite": {
+            "oldValue": 10,
+            "newValue": 10
+          }
         }
       ]
     },
