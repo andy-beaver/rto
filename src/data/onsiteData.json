@@ -330,8 +330,8 @@
       "workdays": 20,
       "off_days": 1,
       "req_onsite": 10,
-      "badge_count": 1,
-      "perc_complete": "10.0%",
+      "badge_count": 2,
+      "perc_complete": "20.0%",
       "logs": [
         {
           "date": "2025-06-04",
@@ -349,6 +349,13 @@
             "oldValue": 10,
             "newValue": 10
           }
+        },
+        {
+          "date": "2025-06-10",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-06-10T16:13:11.585Z",
+          "notes": "",
+          "gasPrice": 2.68
         }
       ]
     },
