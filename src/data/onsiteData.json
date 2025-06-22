@@ -396,9 +396,9 @@
           "gasPrice": 2.68
         },
         {
-          "date": "2025-06-22",
+          "date": "2025-06-20",
           "action": "Vacation day recorded",
-          "timestamp": "2025-06-22T23:11:49.898Z",
+          "timestamp": "2025-06-20T23:11:49.898Z",
           "notes": "",
           "adjustedReqOnsite": {
             "oldValue": 9,
