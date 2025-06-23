@@ -327,9 +327,9 @@
     },
     {
       "month": "June",
-      "workdays": 19,
+      "workdays": 20,
       "off_days": 3,
-      "req_onsite": 8,
+      "req_onsite": 9,
       "badge_count": 6,
       "perc_complete": "66.7%",
       "logs": [
