@@ -172,6 +172,10 @@
     {
       "date": "2025-06-23",
       "gasPrice": 2.64
+    },
+    {
+      "date": "2025-06-25",
+      "gasPrice": 3
     }
   ],
   "gasHistory": [
@@ -326,6 +330,10 @@
     {
       "date": "2025-06-23",
       "pricePerGallon": 2.64
+    },
+    {
+      "date": "2025-06-25",
+      "pricePerGallon": 3
     }
   ]
 }
