@@ -328,10 +328,10 @@
     {
       "month": "June",
       "workdays": 20,
-      "off_days": 3,
-      "req_onsite": 9,
+      "off_days": 4,
+      "req_onsite": 8,
       "badge_count": 8,
-      "perc_complete": "88.9%",
+      "perc_complete": "100.0%",
       "logs": [
         {
           "date": "2025-06-04",
@@ -418,6 +418,16 @@
           "timestamp": "2025-06-25T10:03:58.806Z",
           "notes": "",
           "gasPrice": 3
+        },
+        {
+          "date": "2025-06-27",
+          "action": "Vacation day recorded",
+          "timestamp": "2025-06-27T01:41:55.814Z",
+          "notes": "",
+          "adjustedReqOnsite": {
+            "oldValue": 9,
+            "newValue": 8
+          }
         }
       ]
     },
