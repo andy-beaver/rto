@@ -462,6 +462,34 @@
           "timestamp": "2025-07-09T15:03:22.406Z",
           "notes": "",
           "gasPrice": 2.92
+        },
+        {
+          "date": "2025-07-15",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-07-15T15:03:22.406Z",
+          "notes": "",
+          "gasPrice": 2.92
+        },
+        {
+          "date": "2025-07-16",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-07-16T15:03:22.406Z",
+          "notes": "",
+          "gasPrice": 2.92
+        },
+        {
+          "date": "2025-07-17",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-07-17T15:03:22.406Z",
+          "notes": "",
+          "gasPrice": 2.92
+        },
+        {
+          "date": "2025-07-18",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-07-18T15:03:22.406Z",
+          "notes": "",
+          "gasPrice": 2.92
         }
       ]
     },
