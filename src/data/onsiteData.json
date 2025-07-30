@@ -434,10 +434,10 @@
     {
       "month": "July",
       "workdays": 22,
-      "off_days": 1,
-      "req_onsite": 11,
-      "badge_count": 5,
-      "perc_complete": "45.5%",
+      "off_days": 3,
+      "req_onsite": 10,
+      "badge_count": 9,
+      "perc_complete": "90.0%",
       "logs": [
         {
           "date": "2025-07-02",
