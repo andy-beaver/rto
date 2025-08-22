@@ -526,8 +526,8 @@
       "workdays": 21,
       "off_days": 0,
       "req_onsite": 11,
-      "badge_count": 7,
-      "perc_complete": "63.6%",
+      "badge_count": 8,
+      "perc_complete": "72.7%",
       "logs": [
         {
           "date": "2025-08-06",
@@ -577,6 +577,13 @@
           "timestamp": "2025-08-21T15:49:18.825Z",
           "notes": "",
           "gasPrice": 2.53
+        },
+        {
+          "date": "2025-08-22",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-08-22T10:48:26.335Z",
+          "notes": "",
+          "gasPrice": 2.91
         }
       ]
     },
