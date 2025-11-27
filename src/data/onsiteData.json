@@ -631,9 +631,17 @@
       "workdays": 18,
       "off_days": 0,
       "req_onsite": 9,
-      "badge_count": 0,
-      "perc_complete": "0.0%",
-      "logs": []
+      "badge_count": 1,
+      "perc_complete": "11.1%",
+      "logs": [
+        {
+          "date": "2025-11-27",
+          "action": "Onsite day recorded",
+          "timestamp": "2025-11-27T04:09:40.725Z",
+          "notes": "",
+          "gasPrice": 2.97
+        }
+      ]
     },
     {
       "month": "December",
